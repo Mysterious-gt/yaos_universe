@@ -10,5 +10,14 @@ eureka:
   instance:
     instance-id: blplus-consumer-8050                #定义微服务的名称，多个服务id不能相同
     prefer-ip-address: true                        #是否显示IP和端口
-
+feign:
+  hystrix:
+    enabled: true                 #启动熔断器机制 !!!!!!!!!!!!!
+hystrix: 
+  command: 
+    default: 
+      execution: 
+        isolation: 
+          thread: 
+            timeoutInMilliseconds: 3000
   
