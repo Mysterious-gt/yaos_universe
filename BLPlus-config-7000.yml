@@ -1,0 +1,5 @@
+server:
+  port: 7000
+spring:  application:    name: springcloud-config   #定义服务的名称
+  cloud:    config:      server:        git:          uri: https://github.com/Mysterious-gt/BLPlus-config.git
+          #连接远程github账户
