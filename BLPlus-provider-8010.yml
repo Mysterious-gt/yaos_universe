@@ -21,12 +21,3 @@ mybatis-plus:
     map-underscore-to-camel-case: true
 
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:7010/eureka
-  instance:
-    instance-id: blplus-provider-8010                #定义微服务的名称，多个服务id不能相同
-    prefer-ip-address: true                        #是否显示IP和端口
-  
-  
