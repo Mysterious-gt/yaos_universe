@@ -1,0 +1,14 @@
+server:
+  port: 8050 
+spring: 
+  application: 
+    name: consumer-user
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7010/eureka
+  instance:
+    instance-id: blplus-consumer-8050                #定义微服务的名称，多个服务id不能相同
+    prefer-ip-address: true                        #是否显示IP和端口
+
+  
