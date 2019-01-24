@@ -5,6 +5,8 @@ spring:
     name: consumer-user
 eureka:
   client:
+	register-with-eureka: true
+	fetch-registry: false
     service-url:
       defaultZone: http://localhost:7010/eureka
   instance:
