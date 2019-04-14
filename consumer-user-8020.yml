@@ -14,6 +14,7 @@ feign:
   hystrix:
     enabled: true                 #启动熔断器机制 !!!!!!!!!!!!!
 hystrix: 
+  command: 
     default: 
       execution: 
         isolation: 
