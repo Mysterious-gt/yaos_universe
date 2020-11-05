@@ -45,12 +45,16 @@ public class MybatisConfig {
         Resource[] mapperLocations = new PathMatchingResourcePatternResolver()
                 .getResources("classpath:mapper/*/*Mapper.xml");
         res.setMapperLocations(mapperLocations);
+
+        //设置下划线转驼峰
+        org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
+        config.setMapUnderscoreToCamelCase(true);
+        res.setConfiguration(config);
         return res;
     }
 
     @Bean("txManager")
-    public DataSourceTransactionManager
-    newTransactionManager(@Autowired DataSource dataSource){
+    public DataSourceTransactionManager newTransactionManager(@Autowired DataSource dataSource){
         DataSourceTransactionManager tManager= new DataSourceTransactionManager();
         tManager.setDataSource(dataSource);
         return tManager;

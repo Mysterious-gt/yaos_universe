@@ -3,6 +3,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.sunyog.yaos.common.dao.SysUserDao">
     <select id="getSysUsers" resultType="cn.sunyog.yaos.common.entity.SysUser">
-        select user_id userId,username,password,salt from sys_user
+        select user_id,username,password,salt from sys_user
     </select>
 </mapper>
