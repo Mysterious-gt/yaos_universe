@@ -1,5 +1,7 @@
 package cn.sunyog.yaos.sys.config;
 
+import ch.qos.logback.classic.servlet.LogbackServletContextListener;
+import ch.qos.logback.ext.spring.web.LogbackConfigListener;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
@@ -21,12 +23,19 @@ import java.util.List;
  * @Date: 2020/11/5 11:10 上午
  * @Desc: SpringMVC配置类
  */
+//包扫描，扫描所有controller
 @ComponentScan(value = "cn.sunyog.yaos", useDefaultFilters = false,
         includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,
                 classes = {Controller.class, ControllerAdvice.class})})
+//使用SpringMVC默认配置
 @EnableWebMvc
+//配置类说明
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
+    /**
+     * 配置jsp路径前缀后缀
+     * @param registry
+     */
     public void configureViewResolvers(ViewResolverRegistry registry) {
         registry.jsp("/WEB-INF/pages/", ".jsp");
     }
@@ -40,6 +49,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/static/**").addResourceLocations("/WEB-INF/static/");
     }
 
+    /**
+     * 配置fast json
+     * @param converters
+     */
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
         FastJsonConfig config = new FastJsonConfig();
@@ -48,4 +61,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         converter.setFastJsonConfig(config);
         converters.add(converter);
     }
+
+
 }

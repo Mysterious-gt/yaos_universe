@@ -9,6 +9,7 @@
         <springframework.version>5.2.10.RELEASE</springframework.version>
         <aspectj.version>1.8.9</aspectj.version>
         <javax.version>3.1.0</javax.version>
+        <hibernate.validation.version>6.0.17.Final</hibernate.validation.version>
         <shiro.version>1.3.2</shiro.version>
         <mybatis.version>3.5.6</mybatis.version>
         <mybatis.spring.version>2.0.5</mybatis.spring.version>
@@ -17,9 +18,13 @@
         <fastjson.version>1.2.74</fastjson.version>
         <junit.version>4.12</junit.version>
         <lombok.version>1.18.16</lombok.version>
+        <slf4j.version>2.0.0-alpha1</slf4j.version>
+        <logback.version>1.3.0-alpha5</logback.version>
+        <logback.spring.version>0.1.5</logback.spring.version>
     </properties>
 
     <dependencies>
+        <!--数据库支持-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -31,6 +36,11 @@
             <version>${druid.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>${mybatis.version}</version>
@@ -40,11 +50,7 @@
             <artifactId>mybatis-spring</artifactId>
             <version>${mybatis.spring.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${springframework.version}</version>
-        </dependency>
+        <!--spring mvc-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -60,15 +66,17 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>${javax.version}</version>
         </dependency>
+        <!--数据校验-->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.validation.version}</version>
+        </dependency>
+        <!--json支持-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
         </dependency>
         <!-- shiro -->
         <dependency>
@@ -92,6 +100,33 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
+        </dependency>
+        <!--日志-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.logback-extensions</groupId>
+            <artifactId>logback-ext-spring</artifactId>
+            <version>${logback.spring.version}</version>
+        </dependency>
+        <!--junit测试-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
         </dependency>
     </dependencies>
 

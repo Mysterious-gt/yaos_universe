@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <!--设定控制台日志格式-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--日志格式为：[时间] [线程] 日志级别 Logger所属类.方法名 - 日志信息-->
+            <pattern>[%d] [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--设置root级别，root对应appender-->
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+    </root>
+    <!--按类路径设定日志级别-->
+    <!--设置dao接口日志级别为debug，打印sql-->
+    <logger name="cn.sunyog.yaos.common.dao" level="debug" />
+</configuration>
