@@ -21,7 +21,7 @@ import java.io.Serializable;
 public class SysUser implements Serializable {
     private static final long serialVersionUID = -3408278709212634056L;
     private Long userId;
-    @NotNull
+    @NotNull(message = "参数不能为空")
     @Length(min = 1,max = 2,message = "长度超过限制")
     private String username;
     private String password;

@@ -22,11 +22,11 @@ import java.util.UUID;
 public class TestController {
     @Autowired
     private SysUserDao sysUserDao;
+
     @GetMapping("/json")
     @ResponseBody
     public SysResult getJSON() {
-        SysUser res = new SysUser(10001L, "tony gaga wang", UUID.randomUUID().toString()
-                , UUID.randomUUID().toString());
+        SysUser res = new SysUser(10001L, "tony gaga wang", UUID.randomUUID().toString(), UUID.randomUUID().toString());
         return ResultHelper.ok(res);
     }
 
@@ -37,14 +37,14 @@ public class TestController {
 
     @GetMapping("/users")
     @ResponseBody
-    public SysResult getUsers(){
+    public SysResult getUsers() {
         List<SysUser> res = sysUserDao.getSysUsers();
         return ResultHelper.ok(res);
     }
 
     @PostMapping("/valid")
     @ResponseBody
-    public SysResult toValid(@RequestBody @Valid SysUser user){
+    public SysResult toValid(@RequestBody @Valid SysUser user) {
         return ResultHelper.ok();
     }
 }

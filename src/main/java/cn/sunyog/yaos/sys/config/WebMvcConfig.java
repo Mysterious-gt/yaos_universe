@@ -1,7 +1,5 @@
 package cn.sunyog.yaos.sys.config;
 
-import ch.qos.logback.classic.servlet.LogbackServletContextListener;
-import ch.qos.logback.ext.spring.web.LogbackConfigListener;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
