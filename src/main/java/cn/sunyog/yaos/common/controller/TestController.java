@@ -1,16 +1,18 @@
 package cn.sunyog.yaos.common.controller;
 
-import cn.sunyog.yaos.common.dao.SysUserDao;
-import cn.sunyog.yaos.common.entity.SysUser;
-import cn.sunyog.yaos.sys.rest.ResultHelper;
-import cn.sunyog.yaos.sys.rest.SysResult;
+import java.util.List;
+import java.util.UUID;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.List;
-import java.util.UUID;
+import cn.sunyog.yaos.common.dao.SysUserDao;
+import cn.sunyog.yaos.common.entity.SysUser;
+import cn.sunyog.yaos.sys.rest.ResultHelper;
+import cn.sunyog.yaos.sys.rest.SysResult;
 
 /**
  * @Author: MysteriousGT
