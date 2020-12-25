@@ -19,20 +19,23 @@ import cn.sunyog.yaos.sys.rest.SysResult;
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    private Logger log= LoggerFactory.getLogger(this.getClass());
+    private Logger log = LoggerFactory.getLogger(this.getClass());
 
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public SysResult handle(Exception exception) {
-        StringBuffer sb=new StringBuffer();
-        if(exception instanceof MethodArgumentNotValidException){
-            BindingResult bindRes = ((MethodArgumentNotValidException) exception).getBindingResult();
+        StringBuffer sb = new StringBuffer();
+        if (exception instanceof MethodArgumentNotValidException) {
+            BindingResult bindRes = ((MethodArgumentNotValidException)exception).getBindingResult();
             for (ObjectError item : bindRes.getAllErrors()) {
                 String msg = item.getDefaultMessage();
                 sb.append(msg);
                 log.info(msg);
             }
+            return ResultHelper.fail(sb.toString());
         }
-        return ResultHelper.fail(sb.toString());
+
+        exception.printStackTrace();
+        return ResultHelper.fail(exception.getMessage());
     }
 }
