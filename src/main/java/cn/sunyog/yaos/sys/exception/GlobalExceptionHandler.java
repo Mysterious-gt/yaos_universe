@@ -34,7 +34,6 @@ public class GlobalExceptionHandler {
             }
             return ResultHelper.fail(sb.toString());
         }
-
         exception.printStackTrace();
         return ResultHelper.fail(exception.getMessage());
     }

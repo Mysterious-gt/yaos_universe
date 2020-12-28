@@ -2,7 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.sunyog.yaos.common.dao.SysUserDao">
+    <insert id="insert" parameterType="cn.sunyog.yaos.common.entity.SysUser">
+        insert into sys_user(username, nickname, password, salt, phone, email)
+        values(#{username},#{nickname},#{password},#{salt},#{phone},#{email})
+    </insert>
+    <update id="update" parameterType="cn.sunyog.yaos.common.entity.SysUser">
+        update sys_user
+        <set>
+            <if test="username != null and username != ''">username=#{username},</if>
+            <if test="nickname != null and nickname != ''">nickname=#{nickname},</if>
+            <if test="password != null and password != ''">password=#{password},</if>
+            <if test="salt != null and salt != ''">salt=#{salt},</if>
+            <if test="phone != null and phone != ''">phone=#{phone},</if>
+            <if test="email != null and email != ''">email=#{email},</if>
+        </set>
+        <where>
+            <choose>
+                <when test="userId != null and userId != ''">and user_id=#{userId}</when>
+                <otherwise>and 1=2</otherwise>
+            </choose>
+        </where>
+    </update>
     <select id="getSysUsers" resultType="cn.sunyog.yaos.common.entity.SysUser">
-        select user_id,username,password,salt from sys_user
+        select user_id,username,password,salt from sys_user where is_del='0'
+    </select>
+    <select id="getUserCount" resultType="java.lang.Integer">
+        select count(0) from sys_user
+        <where>
+            is_del='0'
+            <if test="username != null and username != ''">and username=#{username}</if>
+            <if test="email != null and email != ''">and email=#{email}</if>
+            <if test="phone != null and email != ''">and phone=#{phone}</if>
+        </where>
+    </select>
+    <select id="getUserCondition" resultType="cn.sunyog.yaos.common.entity.SysUser">
+        select t.* from sys_user t
+        <where>
+            t.is_del='0'
+            <if test="username != null and username != ''">and t.username=#{username}</if>
+        </where>
     </select>
 </mapper>

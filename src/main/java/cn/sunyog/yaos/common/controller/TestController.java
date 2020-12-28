@@ -28,7 +28,8 @@ public class TestController {
     @GetMapping("/json")
     @ResponseBody
     public SysResult getJSON() {
-        SysUser res = new SysUser(10001L, "tony gaga wang", UUID.randomUUID().toString(), UUID.randomUUID().toString());
+        SysUser res = new SysUser().setUserId(10001L).setUsername("tony gaga wang")
+                .setPassword(UUID.randomUUID().toString()).setSalt(UUID.randomUUID().toString());
         return ResultHelper.ok(res);
     }
 
