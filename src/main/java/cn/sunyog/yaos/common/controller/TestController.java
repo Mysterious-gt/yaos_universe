@@ -13,6 +13,7 @@ import cn.sunyog.yaos.common.dao.SysUserDao;
 import cn.sunyog.yaos.common.entity.SysUser;
 import cn.sunyog.yaos.sys.rest.ResultHelper;
 import cn.sunyog.yaos.sys.rest.SysResult;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @Author: MysteriousGT
@@ -49,5 +50,12 @@ public class TestController {
     @ResponseBody
     public SysResult toValid(@RequestBody @Valid SysUser user) {
         return ResultHelper.ok();
+    }
+
+    @PostMapping("/file")
+    @ResponseBody
+    public SysResult uploadFile(@RequestParam MultipartFile file){
+        String fileName = file.getOriginalFilename();
+        return ResultHelper.ok(fileName);
     }
 }

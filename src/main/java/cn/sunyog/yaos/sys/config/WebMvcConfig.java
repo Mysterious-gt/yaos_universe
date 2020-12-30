@@ -3,6 +3,7 @@ package cn.sunyog.yaos.sys.config;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
@@ -10,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -34,31 +36,38 @@ import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
     /**
-     * 配置jsp路径前缀后缀
-     * @param registry
+     * @Desc: 配置jsp路径前缀后缀
+     * @Author: MysteriousGT
+     * @Date: 2020/12/29
+     * @Param: [registry]
+     * @Return: void
      */
     public void configureViewResolvers(ViewResolverRegistry registry) {
         registry.jsp("/WEB-INF/pages/", ".jsp");
     }
 
     /**
-     * 静态资源访问
-     *
-     * @param registry
+     * @Desc: 静态资源访问
+     * @Author: MysteriousGT
+     * @Date: 2020/12/29
+     * @Param: [registry]
+     * @Return: void
      */
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("/WEB-INF/static/");
     }
 
-    /**
-     * 配置fast json
-     * @param converters
-     */
+   /**
+    * @Desc: 配置fast json
+    * @Author: MysteriousGT
+    * @Date: 2020/12/29
+    * @Param: [converters]
+    * @Return: void
+    */
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
         List<MediaType> supportedMediaTypes=new ArrayList<MediaType>();
         supportedMediaTypes.add(MediaType.APPLICATION_JSON);
-        supportedMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
         supportedMediaTypes.add(MediaType.APPLICATION_ATOM_XML);
         supportedMediaTypes.add(MediaType.APPLICATION_FORM_URLENCODED);
         supportedMediaTypes.add(MediaType.APPLICATION_OCTET_STREAM);
@@ -77,11 +86,25 @@ public class WebMvcConfig implements WebMvcConfigurer {
         converter.setSupportedMediaTypes(supportedMediaTypes);
 
         FastJsonConfig config = new FastJsonConfig();
-        config.setSerializerFeatures(SerializerFeature.WriteDateUseDateFormat, SerializerFeature.QuoteFieldNames,
-                SerializerFeature.WriteNullStringAsEmpty);
+        config.setSerializerFeatures(SerializerFeature.WriteDateUseDateFormat
+                , SerializerFeature.QuoteFieldNames
+                , SerializerFeature.WriteNullStringAsEmpty);
         converter.setFastJsonConfig(config);
         converters.add(converter);
     }
 
-
+    /**
+     * @Desc: 文件上传
+     * @Author: MysteriousGT
+     * @Date: 2020/12/29
+     * @Param: []
+     * @Return: org.springframework.web.multipart.commons.CommonsMultipartResolver
+     */
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setMaxUploadSize(1024*1024);
+        resolver.setMaxInMemorySize(1024*10);
+        return resolver;
+    }
 }

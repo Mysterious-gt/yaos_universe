@@ -1,9 +1,10 @@
 package cn.sunyog.yaos.sys.config;
 
-import ch.qos.logback.ext.spring.web.LogbackConfigListener;
+import javax.servlet.ServletContext;
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.ServletContext;
+import ch.qos.logback.ext.spring.web.LogbackConfigListener;
 
 /**
  * @Author: MysteriousGT
@@ -12,8 +13,11 @@ import javax.servlet.ServletContext;
  */
 public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     /**
-     * 配置logback日志
-     * @param servletContext
+     * @Desc: 配置logback日志
+     * @Author: MysteriousGT
+     * @Date: 2020/12/29
+     * @Param: [servletContext]
+     * @Return: void
      */
     @Override
     protected void registerContextLoaderListener(ServletContext servletContext) {
@@ -22,30 +26,18 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
         servletContext.addListener(logListener);
     }
 
-    /**
-     * 设定Spring配置类
-     * @return
-     */
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{AppRootConfig.class};
+        return new Class[] {AppRootConfig.class};
     }
 
-    /**
-     * 设定SpringMVC配置类
-     * @return
-     */
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{WebMvcConfig.class};
+        return new Class[] {WebMvcConfig.class};
     }
 
-    /**
-     * 设置servlet映射
-     * @return
-     */
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/"};
+        return new String[] {"/"};
     }
 }
